@@ -61,3 +61,5 @@ group :development do
 
 end
 
+gem 'bunny', '~> 2.19'     # Ruby client for RabbitMQ
+gem 'sidekiq', '~> 7.3.9'    # Background job processing (compatible with Ruby 3.0.1)
