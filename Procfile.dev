@@ -1,0 +1,5 @@
+# Procfile.dev
+web: bundle exec rails server
+worker: bundle exec sidekiq
+## rabbitmq_consumer: bundle exec rails runner -e development "require Rails.root.join('app/services/rabbitmq/consumers/blog_consumer'); RabbitMQ::Consumers::BlogConsumer.start"
+rabbitmq_consumer: bundle exec rake rabbitmq:consumer

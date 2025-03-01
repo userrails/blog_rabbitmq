@@ -98,6 +98,7 @@ GEM
       reline (>= 0.3.8)
     drb (2.2.1)
     erubi (1.13.1)
+    foreman (0.88.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.7)
@@ -249,6 +250,7 @@ DEPENDENCIES
   bootsnap
   bunny (~> 2.19)
   debug
+  foreman
   importmap-rails
   jbuilder
   puma (>= 5.0)

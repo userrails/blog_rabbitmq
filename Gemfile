@@ -59,6 +59,8 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
+  gem 'foreman'
+
 end
 
 gem 'bunny', '~> 2.19'     # Ruby client for RabbitMQ
