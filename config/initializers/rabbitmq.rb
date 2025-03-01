@@ -1,5 +1,6 @@
 # config/initializers/rabbitmq.rb
 require 'bunny'
+require Rails.root.join('app', 'services', 'rabbitmq', 'connection_manager')
 
 # Establish connection on Rails startup if not in test environment
 unless Rails.env.test?

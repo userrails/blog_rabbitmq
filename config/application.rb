@@ -38,5 +38,9 @@ module BlogRabbitmq
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Add the services directory to autoload paths
+    # If you're using Rails 7, you might also want to add:
+    config.eager_load_paths += %W(#{config.root}/app/services)
   end
 end
