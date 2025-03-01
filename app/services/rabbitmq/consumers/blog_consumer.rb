@@ -6,7 +6,14 @@ module RabbitMQ
       EXCHANGE_NAME = 'blogs.topic'
       
       def self.start
-        new.start
+        puts "Starting RabbitMQ consumer..."
+        consumer = new
+        consumer.start
+        # Add this loop to keep the process running
+        puts "Consumer started, waiting for messages..."
+        loop do
+          sleep 1
+        end
       end
       
       def initialize
@@ -25,12 +32,14 @@ module RabbitMQ
       def start
         @queue.subscribe(manual_ack: true) do |delivery_info, properties, payload|
           begin
+            puts "Received message with routing key: #{delivery_info.routing_key}"
             process_message(delivery_info, properties, payload)
             @channel.ack(delivery_info.delivery_tag)
           rescue => e
             # Reject and don't requeue if we can't process it
             @channel.reject(delivery_info.delivery_tag, false)
             Rails.logger.error "Error processing message: #{e.message}"
+            puts "Error processing message: #{e.message}"
           end
         end
       end
@@ -52,21 +61,21 @@ module RabbitMQ
       end
       
       def handle_blog_created(data)
-        Rails.logger.info "Blog created: #{data['title']}"
-        # Here you would typically do something like:
-        # - Update a search index
-        # - Generate notifications
-        # - Update counters
+        message = "Blog created: #{data['title']}"
+        Rails.logger.info message
+        puts message
       end
       
       def handle_blog_updated(data)
-        Rails.logger.info "Blog updated: #{data['title']}"
-        # Process the updated blog
+        message = "Blog updated: #{data['title']}"
+        Rails.logger.info message
+        puts message
       end
       
       def handle_blog_deleted(data)
-        Rails.logger.info "Blog deleted: ID #{data['id']}"
-        # Handle the blog deletion
+        message = "Blog deleted: ID #{data['id']}"
+        Rails.logger.info message
+        puts message
       end
     end
   end
